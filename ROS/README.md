@@ -23,6 +23,12 @@ roslaunch dogbot_gazebo gztest.launch paused:=true
 ```
 ![Gazebo DogBot screenshot](../Library/dogbot.gazebo.png "DogBot model in empty Gazebo sim world")
 
+## Gait Gazebo Simulation
+
+```bat
+roslaunch dogbot_gait gazebo_gait.launch paused:=true
+```
+
 ## View in RViz
 
 To view the DogBot sim in RViz:
