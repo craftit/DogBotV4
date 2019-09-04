@@ -102,7 +102,7 @@ int main(int argc, char **argv)
   ros::Subscriber subSteer = n.subscribe<geometry_msgs::Twist>(
       steerTopicName,1, [&controlData](const geometry_msgs::Twist::ConstPtr &msg) mutable
       {
-        // Convert messages into a command and swap the coordinate system so
+        // Convert messages into a command and rotate the coordinate system so
         // x is forward.
         std::lock_guard<std::mutex> lock(controlData.m_access);
         controlData.m_twist[0] = msg->linear.y;
