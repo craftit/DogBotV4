@@ -371,20 +371,20 @@ namespace ReactRoboticsN
 
   DogBotV4KinematicsC::DogBotV4KinematicsC()
   {
-    m_legKinimatics[0].SetOrigin(Eigen::Vector3f(-m_bodyWidth/2.0,m_bodyLength/2.0,0));
-    m_legKinimatics[0].SetJointDirections(Eigen::Vector3f(-1.0,-1.0,-1.0));
-    m_legKinimatics[0].SetName("front_left");
-    m_legKinimatics[1].SetJointDirections(Eigen::Vector3f(-1.0,1.0,1.0));
-    m_legKinimatics[1].SetOrigin(Eigen::Vector3f(m_bodyWidth/2.0,m_bodyLength/2.0,0));
-    m_legKinimatics[1].SetName("front_right");
-    m_legKinimatics[1].InvertL0();
-    m_legKinimatics[2].SetOrigin(Eigen::Vector3f(-m_bodyWidth/2.0,-m_bodyLength/2.0,0));
-    m_legKinimatics[2].SetJointDirections(Eigen::Vector3f(1.0,-1.0,-1.0));
-    m_legKinimatics[2].SetName("back_left");
-    m_legKinimatics[3].SetOrigin(Eigen::Vector3f(m_bodyWidth/2.0,-m_bodyLength/2.0,0));
-    m_legKinimatics[3].SetJointDirections(Eigen::Vector3f(1.0,1.0,1.0));
-    m_legKinimatics[3].SetName("back_right");
-    m_legKinimatics[3].InvertL0();
+    m_legKinematics[0].SetOrigin(Eigen::Vector3f(-m_bodyWidth/2.0,m_bodyLength/2.0,0));
+    m_legKinematics[0].SetJointDirections(Eigen::Vector3f(-1.0,-1.0,-1.0));
+    m_legKinematics[0].SetName("front_left");
+    m_legKinematics[1].SetJointDirections(Eigen::Vector3f(-1.0,1.0,1.0));
+    m_legKinematics[1].SetOrigin(Eigen::Vector3f(m_bodyWidth/2.0,m_bodyLength/2.0,0));
+    m_legKinematics[1].SetName("front_right");
+    m_legKinematics[1].InvertL0();
+    m_legKinematics[2].SetOrigin(Eigen::Vector3f(-m_bodyWidth/2.0,-m_bodyLength/2.0,0));
+    m_legKinematics[2].SetJointDirections(Eigen::Vector3f(1.0,-1.0,-1.0));
+    m_legKinematics[2].SetName("back_left");
+    m_legKinematics[3].SetOrigin(Eigen::Vector3f(m_bodyWidth/2.0,-m_bodyLength/2.0,0));
+    m_legKinematics[3].SetJointDirections(Eigen::Vector3f(1.0,1.0,1.0));
+    m_legKinematics[3].SetName("back_right");
+    m_legKinematics[3].InvertL0();
   }
 
   //! Convert feet position to joint angles, in the order given in 'JointNames'
@@ -399,7 +399,7 @@ namespace ReactRoboticsN
     auto pp = positions.begin();
     for(int i = 0;i < 4;i++,pp++) {
       Eigen::Vector3f jangles;
-      if(!m_legKinimatics[i].Inverse(positions[i],jangles))
+      if(!m_legKinematics[i].Inverse(positions[i],jangles))
         ok = false;
       for(int j = 0;j < 3;j++)
         angles[i*3 + j] = jangles[j];
@@ -418,7 +418,7 @@ namespace ReactRoboticsN
       jangles[0] = angles[i*3 + 0];
       jangles[1] = angles[i*3 + 1];
       jangles[2] = angles[i*3 + 2];
-      if(!m_legKinimatics[i].Forward(jangles,positions[i]))
+      if(!m_legKinematics[i].Forward(jangles,positions[i]))
         ok = false;
     }
 
@@ -431,7 +431,7 @@ namespace ReactRoboticsN
   {
     bool ok = true;
     for(int i = 0;i < 4;i++) {
-      if(!m_legKinimatics[i].ClipPosition(feetPositions[i]))
+      if(!m_legKinematics[i].ClipPosition(feetPositions[i]))
         ok = false;
     }
     return ok;

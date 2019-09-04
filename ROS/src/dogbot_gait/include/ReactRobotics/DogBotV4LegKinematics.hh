@@ -199,8 +199,8 @@ namespace ReactRoboticsN
     DogBotV4KinematicsC();
 
     //! Access legs
-    DogBotV4LegKinematicsC &LegKinimatics(int i)
-    { return m_legKinimatics[i]; }
+    DogBotV4LegKinematicsC &LegKinematics(int i)
+    { return m_legKinematics[i]; }
 
     //! Convert array of 4 feet positions in the robot body coordinate frame to joint angles, in the order given by 'JointNames()'
     bool FeetPositions2JointAngles(const std::array<Eigen::Vector3f,4> &feetPositions,Eigen::VectorXf &angles);
@@ -215,7 +215,7 @@ namespace ReactRoboticsN
 
     //! Get origin for leg.
     const Eigen::Vector3f &LegOrigin(int legId) const
-    { return m_legKinimatics[legId].Origin(); }
+    { return m_legKinematics[legId].Origin(); }
 
     //! Access a list of joint names
     static std::vector<std::string> JointNames();
@@ -228,7 +228,7 @@ namespace ReactRoboticsN
     float m_bodyWidth = 0.304;
     float m_bodyLength = 0.556;
 
-    DogBotV4LegKinematicsC m_legKinimatics[4];
+    DogBotV4LegKinematicsC m_legKinematics[4];
   };
 
 
